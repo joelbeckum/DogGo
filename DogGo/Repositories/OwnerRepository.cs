@@ -14,7 +14,14 @@ namespace DogGo.Repositories
             _config = config;
         }
 
-        public SqlConnection Connection => new SqlConnection(_config.GetConnectionString("DefaultConnection"));
+        //public SqlConnection Connection => new SqlConnection(_config.GetConnectionString("DefaultConnection"));
+        public SqlConnection Connection
+        {
+            get
+            {
+                return new SqlConnection(_config.GetConnectionString("DefaultConnection"));
+            }
+        }
 
         public List<Owner> GetAllOwners()
         {

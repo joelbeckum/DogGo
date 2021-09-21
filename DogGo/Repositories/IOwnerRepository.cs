@@ -7,6 +7,6 @@ namespace DogGo.Repositories
     public interface IOwnerRepository
     {
         List<Owner> GetAllOwners();
-        Walker GetOwnerById(int id);
+        Owner GetOwnerById(int id);
     }
 }
