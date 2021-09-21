@@ -84,7 +84,7 @@ namespace DogGo.Repositories
 	                                           n.Name 'neighborhoodName'
                                         FROM Owner o
                                         LEFT JOIN Neighborhood n ON o.NeighborhoodId = n.Id
-                                        WHERE ownerId = @id";
+                                        WHERE o.Id = @id";
                     cmd.Parameters.AddWithValue("@id", id);
 
                     using (var reader = cmd.ExecuteReader())
