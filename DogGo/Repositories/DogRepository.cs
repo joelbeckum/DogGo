@@ -84,9 +84,9 @@ namespace DogGo.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO Dog ([Name], OwnerId, Breed, Notes, ImageUrl
+                    cmd.CommandText = @"INSERT INTO Dog ([Name], OwnerId, Breed, Notes, ImageUrl)
                                         OUTPUT INSERTED.Id
-                                        VALUES (@name, @ownerId, @breed, @notes, @imageUrl";
+                                        VALUES (@name, @ownerId, @breed, @notes, @imageUrl)";
                     cmd.Parameters.AddWithValue("@name", dog.Name);
                     cmd.Parameters.AddWithValue("@ownerId", dog.OwnerId);
                     cmd.Parameters.AddWithValue("@breed", dog.Breed);
