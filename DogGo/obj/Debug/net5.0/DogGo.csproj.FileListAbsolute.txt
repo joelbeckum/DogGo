@@ -432,3 +432,4 @@ C:\Users\kille\workspace\csharp\DogGo\DogGo\obj\Debug\net5.0\Razor\Views\Owners\
 C:\Users\kille\workspace\csharp\DogGo\DogGo\obj\Debug\net5.0\Razor\Views\Owners\Edit.cshtml.g.cs
 C:\Users\kille\workspace\csharp\DogGo\DogGo\obj\Debug\net5.0\Razor\Views\Dogs\Index.cshtml.g.cs
 C:\Users\kille\workspace\csharp\DogGo\DogGo\obj\Debug\net5.0\Razor\Views\Dogs\Create.cshtml.g.cs
+C:\Users\kille\workspace\csharp\DogGo\DogGo\obj\Debug\net5.0\Razor\Views\Dogs\Edit.cshtml.g.cs

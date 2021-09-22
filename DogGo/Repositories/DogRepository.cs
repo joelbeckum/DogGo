@@ -77,6 +77,68 @@ namespace DogGo.Repositories
             }
         }
 
+        public Dog GetDogById(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT d.Id 'dogId',
+	                                           d.Name 'dogName',
+	                                           d.OwnerId,
+	                                           d.Breed,
+	                                           d.Notes,
+	                                           d.ImageUrl,
+	                                           o.Id 'ownerId',
+	                                           o.Name 'ownerName',
+	                                           o.Email,
+	                                           o.Address,
+	                                           o.Phone,
+	                                           o.NeighborhoodId
+                                        FROM Dog d
+                                        LEFT JOIN Owner o ON d.OwnerId = o.Id
+                                        WHERE d.Id = @id";
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            Dog dog = new Dog()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("dogId")),
+                                Name = reader.GetString(reader.GetOrdinal("dogName")),
+                                OwnerId = reader.GetInt32(reader.GetOrdinal("OwnerId")),
+                                Owner = new Owner()
+                                {
+                                    Id = reader.GetInt32(reader.GetOrdinal("ownerId")),
+                                    Name = reader.GetString(reader.GetOrdinal("ownerName")),
+                                    Email = reader.GetString(reader.GetOrdinal("Email")),
+                                    Address = reader.GetString(reader.GetOrdinal("Address")),
+                                    Phone = reader.GetString(reader.GetOrdinal("Phone")),
+                                    NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId"))
+                                },
+                                Breed = reader.GetString(reader.GetOrdinal("Breed"))
+                            };
+                            if (!reader.IsDBNull(reader.GetOrdinal("Notes")))
+                            {
+                                dog.Notes = reader.GetString(reader.GetOrdinal("Notes"));
+                            }
+                            if (!reader.IsDBNull(reader.GetOrdinal("ImageUrl")))
+                            {
+                                dog.ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl"));
+                            }
+
+                            return dog;
+                        }
+
+                        return null;
+                    }
+                }
+            }
+        }
+
         public void AddDog(Dog dog)
         {
             using (var conn = Connection)
